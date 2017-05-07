@@ -1,9 +1,3 @@
-REMEMBER:
-
-* Be concise
-* Don't say "uhm"
-* Don't drone, talk animatedly
-
 This is just sort of a brain dump doc for me to record some ideas and maybe figure some of this out.
 
 I’d like to lead with some sort of provocative question. One that will hopefully be answered satisfactorily during the talk. Maybe something like:
