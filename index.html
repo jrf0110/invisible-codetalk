@@ -1,0 +1,992 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="/dist/slides.css">
+    <!-- <script src="/node_modules/mathjax/Mathjax.js?config=TeX-AMS_CHTML"></script> -->
+    <!-- <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script> -->
+  </head>
+  <body>
+    <div id="impress">
+      <!-- Intro -->
+      <div class="step slide" id="slide-intro-1" data-x="-3000" data-y="-1500">
+        <h1 class="slab"><span class="invisible-animate">Invisible</span> Code</h1>
+        <h3>Writing third-party code responsibly</h3>
+        <p><a href="http://j0.hn">John Fawcett</a></p>
+      </div>
+      <div class="step slide slide-stats" id="slide-intro-2" data-x="-2500" data-y="-1500" data-rotate-z="90" style="width: 1200px">
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-main">1 billion</div>
+            <div class="stat-detail">Unique Hostnames</div>
+            <div class="stat-source">
+              <a href="http://news.netcraft.com/archives/category/web-server-survey/" target="_blank">Netcraft Web Survey</a>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">72% of pages</div>
+            <div class="stat-detail">More than 51 requests</div>
+            <div class="stat-source">
+              <a href="http://news.netcraft.com/archives/category/web-server-survey/" target="_blank">Netcraft Web Survey</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step slide" id="slide-intro-3" data-x="-2500" data-y="-500" data-rotate-z="90">
+        <ol>
+          <li>Copy-and-paste <code>&lt;script&gt;</code> tag</li>
+          <li>CMS Plugins (Wordpress, Wix, Squarespace, etc.)</li>
+          <li>Ask a developer</li>
+        </ol>
+      </div>
+      <div class="step slide" id="slide-intro-4" data-x="-2500" data-y="-500" data-rotate-z="90">
+      </div>
+
+      <!-- Contraints -->
+      <div class="step slide slide-list-item" id="slide-constraints-1" data-x="-3500" data-y="-500" data-rotate-z="90">
+        <h1 class="slab">Contraints</h1>
+      </div>
+      <div class="step slide slide-list-item" id="slide-constraints-2" data-x="-3600" data-y="-500" data-rotate-z="90">
+        <h1 class="slide-list-item">Environment</h1>
+      </div>
+      <div class="step slide slide-list-item" id="slide-constraints-3" data-x="-3700" data-y="-500" data-rotate-z="90">
+        <h1 class="slide-list-item">File Size</h1>
+      </div>
+      <div class="step slide slide-list-item" id="slide-constraints-4" data-x="-3800" data-y="-500" data-rotate-z="90">
+        <h1 class="slide-list-item">Browser Compatibility</h1>
+      </div>
+      <div class="step slide slide-list-item" id="slide-constraints-5" data-x="-3900" data-y="-500" data-rotate-z="90">
+        <h1 class="slide-list-item">Network</h1>
+      </div>
+
+      <!-- Writing CSS -->
+      <div class="step slide" id="slide-css-1-1" data-x="-3000" data-y="-500">
+        <h1>Writing CSS</h1>
+        <div class="columns" style="opacity: 0">
+          <div class="padded-column">
+<pre><code class="css">.my-widget {
+  background: blue;
+}</code></pre>
+          </div>
+          <div class="padded-column">
+<pre><code class="html">&lt;div
+  style="background: blue"
+&gt;&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step slide" id="slide-css-1-2" data-x="-2600" data-y="-600">
+        <ul>
+          <li>No fonts</li>
+          <li>No global rules</li>
+          <li>Compress those images</li>
+          <li>Keep the file size low</li>
+        </ul>
+      </div>
+      <div class="step slide" id="slide-css-1-3" data-x="-3000" data-y="-500">
+        <h1>Writing CSS</h1>
+        <div class="columns">
+          <div class="padded-column">
+<pre><code class="css">.my-widget {
+  background: blue;
+}</code></pre>
+          </div>
+          <div class="padded-column">
+<pre><code class="html">&lt;div
+  style="background: blue"
+&gt;&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step slide" id="slide-css-2" data-x="-3000" data-y="-500" data-z="-300">
+        <h1>And suddenly</h1>
+<pre><code class="css">div {
+  border-radius: 5px;
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-css-3" data-x="-3000" data-y="-500" data-z="-300">
+        <h1>And suddenly</h1>
+<pre><code class="css">div {
+  border-radius: 5px!important;
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-css-4" data-x="-2000" data-y="-500" data-z="-300">
+        <h1>Custom Elements</h1>
+<pre><code class="css">my-widget {
+  background: blue;
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-css-5" data-x="-2000" data-y="-500">
+        <h1>And suddenly</h1>
+<pre><code class="css">* {
+  border-radius: 5px;
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-css-6" data-x="-2000" data-y="-500">
+        <h1>iframes</h1>
+<pre><code class="javascript">const elementReset = {
+  alignContent: 'stretch'
+  alignItems: 'stretch'
+  alignSelf: 'stretch'
+  alignmentBaseline: 'auto'
+  background: 'none'
+  backgroundAttachment: 'scroll'
+  backgroundColor: 'transparent'
+  backgroundImage: 'none'
+  backgroundOrigin: 'paddingBox'
+  backgroundPosition: '0% 0%'
+  backgroundPositionX: '0%'
+  backgroundPositionY: '0%'
+  backgroundRepeat: 'repeat'
+  backgroundRepeatX: 'initial'
+  backgroundRepeatY: 'initial'
+  backgroundSize: 'auto'
+  baselineShift: 'baseline'
+  border: 0
+  borderBottom: 0
+  borderBottomColor: 'transparent'
+  borderBottomLeftRadius: 0
+  borderBottomRightRadius: 0
+  borderBottomStyle: 'none'
+  borderBottomWidth: 0
+  borderCollapse: 'separate'
+  borderColor: 'transparent'
+  borderImage: 'none'
+  borderImageOutset: 0
+  borderImageRepeat: 'stretch'
+  borderImageSlice: '100%'
+  borderImageSource: 'none'
+  borderImageWidth: 1
+  borderLeft: 0
+  borderLeftColor: 'transparent'
+  borderLeftStyle: 'none'
+  borderLeftWidth: 0
+  borderRight: 0
+  borderRightColor: 'transparent'
+  borderRightStyle: 'none'
+  borderRightWidth: 0
+  borderSpacing: '0 0'
+  borderStyle: 'none'
+  borderTop: 0
+  borderTopColor: 'transparent'
+  borderTopLeftRadius: 0
+  borderTopRightRadius: 0
+  borderTopStyle: 'none'
+  borderTopWidth: 0
+  borderWidth: 0
+  bottom: 'auto'
+  boxShadow: 'none'
+  bufferedRendering: 'auto'
+  captionSide: 'top'
+  clear: 'none'
+  clip: 'auto'
+  clipPath: 'none'
+  clipRule: 'nonzero'
+  color: '#000'
+  colorInterpolation: 'srgb'
+  colorInterpolationFilters: 'linearrgb'
+  colorProfile: 'initial'
+  colorRendering: 'auto'
+  content: 'initial'
+  counterIncrement: 'initial'
+  counterReset: 'initial'
+  cursor: 'pointer'
+  direction: 'ltr'
+  display: 'block'
+  dominantBaseline: 'auto'
+  emptyCells: 'show'
+  enableBackground: 'initial'
+  fill: 'transparent'
+  fillOpacity: 1
+  fillRule: 'nonzero'
+  filter: 'none'
+  flex: '0 1 auto'
+  flexBasis: 'auto'
+  flexDirection: 'row'
+  flexFlow: 'row nowrap'
+  flexGrow: 0
+  flexShrink: 1
+  flexWrap: 'nowrap'
+  float: 'none'
+  font: 'normal normal normal 16px/normal \'Helvetica Neue\', Helvetica, Arial, sansSerif'
+  fontFamily: '\'Helvetica Neue\', Helvetica, Arial, sansSerif'
+  fontKerning: 'auto'
+  fontSize: '16px'
+  fontStretch: 'initial'
+  fontStyle: 'normal'
+  fontVariant: 'normal'
+  fontVariantLigatures: 'normal'
+  fontWeight: 'normal'
+  glyphOrientationHorizontal: '0deg'
+  glyphOrientationVertical: 'auto'
+  height: 'auto'
+  imageRendering: 'auto'
+  justifyContent: 'flexStart'
+  kerning: 0
+  left: 'auto'
+  letterSpacing: 'normal'
+  lightingColor: '#fff'
+  lineHeight: 'normal'
+  listStyle: 'disc outside none'
+  listStyleImage: 'none'
+  listStylePosition: 'outside'
+  listStyleType: 'disc'
+  margin: 0
+  marginBottom: 0
+  marginLeft: 0
+  marginRight: 0
+  marginTop: 0
+  marker: 'initial'
+  markerEnd: 'none'
+  markerMid: 'none'
+  markerStart: 'none'
+  mask: 'none'
+  maskType: 'luminance'
+  maxHeight: 'none'
+  maxWidth: 'none'
+  maxZoom: 'initial'
+  minHeight: 0
+  minWidth: 0
+  minZoom: 'initial'
+  objectFit: 'fill'
+  objectPosition: '50% 50%'
+  opacity: 1
+  order: 0
+  orientation: 'initial'
+  orphans: 'auto'
+  outline: 'transparent none 0'
+  outlineColor: 'transparent'
+  outlineOffset: 0
+  outlineStyle: 'none'
+  outlineWidth: 0
+  overflow: 'visible'
+  overflowWrap: 'normal'
+  overflowX: 'visible'
+  overflowY: 'visible'
+  padding: 0
+  paddingBottom: 0
+  paddingLeft: 0
+  paddingRight: 0
+  paddingTop: 0
+  page: 'initial'
+  pageBreakAfter: 'auto'
+  pageBreakBefore: 'auto'
+  pageBreakInside: 'auto'
+  pointerEvents: 'auto'
+  position: 'static'
+  quotes: 'initial'
+  resize: 'none'
+  right: 'auto'
+  shapeRendering: 'auto'
+  size: 'initial'
+  speak: 'normal'
+  src: 'initial'
+  tabSize: '8'
+  tableLayout: 'auto'
+  textAlign: 'start'
+  textAnchor: 'start'
+  textDecoration: 'none solid transparent'
+  textIndent: 0
+  textLineThroughColor: 'initial'
+  textLineThroughMode: 'initial'
+  textLineThroughStyle: 'initial'
+  textLineThroughWidth: 'initial'
+  textOverflow: 'clip'
+  textOverlineColor: 'initial'
+  textOverlineMode: 'initial'
+  textOverlineStyle: 'initial'
+  textOverlineWidth: 'initial'
+  textRendering: 'optimizeLegibility'
+  textShadow: 'none'
+  textTransform: 'none'
+  textUnderlineColor: 'initial'
+  textUnderlineMode: 'initial'
+  textUnderlineStyle: 'initial'
+  textUnderlineWidth: 'initial'
+  top: 'auto'
+  transition: 'all 0s ease 0s'
+  transitionDelay: '0s'
+  transitionDuration: '0s'
+  transitionProperty: 'all'
+  transitionTimingFunction: 'ease'
+  unicodeBidi: 'normal'
+  unicodeRange: 'initial'
+  userZoom: 'initial'
+  vectorEffect: 'none'
+  verticalAlign: 'baseline'
+  visibility: 'visible'
+  WebkitAnimation: 'none 0s ease 0s 1 normal none running'
+  MozAnimation: 'none 0s ease 0s 1 normal none running'
+  animation: 'none 0s ease 0s 1 normal none running'
+  WebkitAnimationDelay: '0s'
+  MozAnimationDelay: '0s'
+  animationDelay: '0s'
+  WebkitAnimationDirection: 'normal'
+  MozAnimationDirection: 'normal'
+  animationDirection: 'normal'
+  WebkitAnimationDuration: '0s'
+  MozAnimationDuration: '0s'
+  animationDuration: '0s'
+  WebkitAnimationFillMode: 'none'
+  MozAnimationFillMode: 'none'
+  animationFillMode: 'none'
+  WebkitAnimationIterationCount: 1
+  MozAnimationIterationCount: 1
+  animationIterationCount: 1
+  WebkitAnimationName: 'none'
+  MozAnimationName: 'none'
+  animationName: 'none'
+  WebkitAnimationPlayState: 'running'
+  MozAnimationPlayState: 'running'
+  animationPlayState: 'running'
+  WebkitAnimationTimingFunction: 'ease'
+  MozAnimationTimingFunction: 'ease'
+  animationTimingFunction: 'ease'
+  WebkitAppRegion: 'noDrag'
+  MozAppRegion: 'noDrag'
+  appRegion: 'noDrag'
+  WebkitAppearance: 'none'
+  MozAppearance: 'none'
+  appearance: 'none'
+  WebkitAspectRatio: 'none'
+  MozAspectRatio: 'none'
+  aspectRatio: 'none'
+  WebkitBackfaceVisibility: 'visible'
+  MozBackfaceVisibility: 'visible'
+  backfaceVisibility: 'visible'
+  WebkitBackgroundClip: 'borderBox'
+  MozBackgroundClip: 'borderBox'
+  backgroundClip: 'borderBox'
+  WebkitBackgroundComposite: 'sourceOver'
+  MozBackgroundComposite: 'sourceOver'
+  backgroundComposite: 'sourceOver'
+  WebkitBackgroundOrigin: 'paddingBox'
+  MozBackgroundOrigin: 'paddingBox'
+  backgroundOrigin: 'paddingBox'
+  WebkitBackgroundSize: 'auto'
+  MozBackgroundSize: 'auto'
+  backgroundSize: 'auto'
+  WebkitBorderAfter: 0
+  MozBorderAfter: 0
+  borderAfter: 0
+  WebkitBorderAfterColor: 'transparent'
+  MozBorderAfterColor: 'transparent'
+  borderAfterColor: 'transparent'
+  WebkitBorderAfterStyle: 'none'
+  MozBorderAfterStyle: 'none'
+  borderAfterStyle: 'none'
+  WebkitBorderAfterWidth: 0
+  MozBorderAfterWidth: 0
+  borderAfterWidth: 0
+  WebkitBorderBefore: 0
+  MozBorderBefore: 0
+  borderBefore: 0
+  WebkitBorderBeforeColor: 'transparent'
+  MozBorderBeforeColor: 'transparent'
+  borderBeforeColor: 'transparent'
+  WebkitBorderBeforeStyle: 'none'
+  MozBorderBeforeStyle: 'none'
+  borderBeforeStyle: 'none'
+  WebkitBorderBeforeWidth: 0
+  MozBorderBeforeWidth: 0
+  borderBeforeWidth: 0
+  WebkitBorderEnd: 0
+  MozBorderEnd: 0
+  borderEnd: 0
+  WebkitBorderEndColor: 'transparent'
+  MozBorderEndColor: 'transparent'
+  borderEndColor: 'transparent'
+  WebkitBorderEndStyle: 'none'
+  MozBorderEndStyle: 'none'
+  borderEndStyle: 'none'
+  WebkitBorderEndWidth: 0
+  MozBorderEndWidth: 0
+  borderEndWidth: 0
+  WebkitBorderFit: 'border'
+  MozBorderFit: 'border'
+  borderFit: 'border'
+  WebkitBorderHorizontalSpacing: 0
+  MozBorderHorizontalSpacing: 0
+  borderHorizontalSpacing: 0
+  WebkitBorderImage: 'none'
+  MozBorderImage: 'none'
+  borderImage: 'none'
+  WebkitBorderRadius: 'initial'
+  MozBorderRadius: 'initial'
+  borderRadius: 'initial'
+  WebkitBorderStart: 0
+  MozBorderStart: 0
+  borderStart: 0
+  WebkitBorderStartColor: 'transparent'
+  MozBorderStartColor: 'transparent'
+  borderStartColor: 'transparent'
+  WebkitBorderStartStyle: 'none'
+  MozBorderStartStyle: 'none'
+  borderStartStyle: 'none'
+  WebkitBorderStartWidth: 0
+  MozBorderStartWidth: 0
+  borderStartWidth: 0
+  WebkitBorderVerticalSpacing: 0
+  MozBorderVerticalSpacing: 0
+  borderVerticalSpacing: 0
+  WebkitBoxAlign: 'stretch'
+  MozBoxAlign: 'stretch'
+  boxAlign: 'stretch'
+  WebkitBoxDecorationBreak: 'slice'
+  MozBoxDecorationBreak: 'slice'
+  boxDecorationBreak: 'slice'
+  WebkitBoxDirection: 'normal'
+  MozBoxDirection: 'normal'
+  boxDirection: 'normal'
+  WebkitBoxFlex: 0
+  MozBoxFlex: 0
+  boxFlex: 0
+  WebkitBoxFlexGroup: 1
+  MozBoxFlexGroup: 1
+  boxFlexGroup: 1
+  WebkitBoxLines: 'single'
+  MozBoxLines: 'single'
+  boxLines: 'single'
+  WebkitBoxOrdinalGroup: 1
+  MozBoxOrdinalGroup: 1
+  boxOrdinalGroup: 1
+  WebkitBoxOrient: 'horizontal'
+  MozBoxOrient: 'horizontal'
+  boxOrient: 'horizontal'
+  WebkitBoxPack: 'start'
+  MozBoxPack: 'start'
+  boxPack: 'start'
+  WebkitBoxReflect: 'none'
+  MozBoxReflect: 'none'
+  boxReflect: 'none'
+  WebkitBoxShadow: 'none'
+  MozBoxShadow: 'none'
+  boxShadow: 'none'
+  WebkitBoxSizing: 'borderBox'
+  MozBoxSizing: 'borderBox'
+  boxSizing: 'borderBox'
+  WebkitClipPath: 'none'
+  MozClipPath: 'none'
+  clipPath: 'none'
+  WebkitColumnAxis: 'auto'
+  MozColumnAxis: 'auto'
+  columnAxis: 'auto'
+  WebkitColumnBreakAfter: 'auto'
+  MozColumnBreakAfter: 'auto'
+  columnBreakAfter: 'auto'
+  WebkitColumnBreakBefore: 'auto'
+  MozColumnBreakBefore: 'auto'
+  columnBreakBefore: 'auto'
+  WebkitColumnBreakInside: 'auto'
+  MozColumnBreakInside: 'auto'
+  columnBreakInside: 'auto'
+  WebkitColumnCount: 'auto'
+  MozColumnCount: 'auto'
+  columnCount: 'auto'
+  WebkitColumnGap: 'normal'
+  MozColumnGap: 'normal'
+  columnGap: 'normal'
+  WebkitColumnProgression: 'normal'
+  MozColumnProgression: 'normal'
+  columnProgression: 'normal'
+  WebkitColumnRule: 0
+  MozColumnRule: 0
+  columnRule: 0
+  WebkitColumnRuleColor: 'transparent'
+  MozColumnRuleColor: 'transparent'
+  columnRuleColor: 'transparent'
+  WebkitColumnRuleStyle: 'none'
+  MozColumnRuleStyle: 'none'
+  columnRuleStyle: 'none'
+  WebkitColumnRuleWidth: 0
+  MozColumnRuleWidth: 0
+  columnRuleWidth: 0
+  WebkitColumnSpan: 'none'
+  MozColumnSpan: 'none'
+  columnSpan: 'none'
+  WebkitColumnWidth: 'auto'
+  MozColumnWidth: 'auto'
+  columnWidth: 'auto'
+  WebkitColumns: 'auto auto'
+  MozColumns: 'auto auto'
+  columns: 'auto auto'
+  WebkitFilter: 'none'
+  MozFilter: 'none'
+  filter: 'none'
+  WebkitFontFeatureSettings: 'normal'
+  MozFontFeatureSettings: 'normal'
+  fontFeatureSettings: 'normal'
+  WebkitFontSizeDelta: 'initial'
+  MozFontSizeDelta: 'initial'
+  fontSizeDelta: 'initial'
+  WebkitFontSmoothing: 'auto'
+  MozFontSmoothing: 'auto'
+  fontSmoothing: 'auto'
+  WebkitHighlight: 'none'
+  MozHighlight: 'none'
+  highlight: 'none'
+  WebkitHyphenateCharacter: 'auto'
+  MozHyphenateCharacter: 'auto'
+  hyphenateCharacter: 'auto'
+  WebkitLineBoxContain: 'block inline replaced'
+  MozLineBoxContain: 'block inline replaced'
+  lineBoxContain: 'block inline replaced'
+  WebkitLineBreak: 'auto'
+  MozLineBreak: 'auto'
+  lineBreak: 'auto'
+  WebkitLineClamp: 'none'
+  MozLineClamp: 'none'
+  lineClamp: 'none'
+  WebkitLocale: 'auto'
+  MozLocale: 'auto'
+  locale: 'auto'
+  WebkitMask: 'initial'
+  MozMask: 'initial'
+  mask: 'initial'
+  WebkitMaskBoxImage: 'none'
+  MozMaskBoxImage: 'none'
+  maskBoxImage: 'none'
+  WebkitMaskBoxImageOutset: 0
+  MozMaskBoxImageOutset: 0
+  maskBoxImageOutset: 0
+  WebkitMaskBoxImageRepeat: 'stretch'
+  MozMaskBoxImageRepeat: 'stretch'
+  maskBoxImageRepeat: 'stretch'
+  WebkitMaskBoxImageSlice: '0 fill'
+  MozMaskBoxImageSlice: '0 fill'
+  maskBoxImageSlice: '0 fill'
+  WebkitMaskBoxImageSource: 'none'
+  MozMaskBoxImageSource: 'none'
+  maskBoxImageSource: 'none'
+  WebkitMaskBoxImageWidth: 'auto'
+  MozMaskBoxImageWidth: 'auto'
+  maskBoxImageWidth: 'auto'
+  WebkitMaskClip: 'borderBox'
+  MozMaskClip: 'borderBox'
+  maskClip: 'borderBox'
+  WebkitMaskComposite: 'sourceOver'
+  MozMaskComposite: 'sourceOver'
+  maskComposite: 'sourceOver'
+  WebkitMaskImage: 'none'
+  MozMaskImage: 'none'
+  maskImage: 'none'
+  WebkitMaskOrigin: 'borderBox'
+  MozMaskOrigin: 'borderBox'
+  maskOrigin: 'borderBox'
+  WebkitMaskPosition: '0% 0%'
+  MozMaskPosition: '0% 0%'
+  maskPosition: '0% 0%'
+  WebkitMaskPositionX: '0%'
+  MozMaskPositionX: '0%'
+  maskPositionX: '0%'
+  WebkitMaskPositionY: '0%'
+  MozMaskPositionY: '0%'
+  maskPositionY: '0%'
+  WebkitMaskRepeat: 'repeat'
+  MozMaskRepeat: 'repeat'
+  maskRepeat: 'repeat'
+  WebkitMaskRepeatX: 'initial'
+  MozMaskRepeatX: 'initial'
+  maskRepeatX: 'initial'
+  WebkitMaskRepeatY: 'initial'
+  MozMaskRepeatY: 'initial'
+  maskRepeatY: 'initial'
+  WebkitMaskSize: 'auto'
+  MozMaskSize: 'auto'
+  maskSize: 'auto'
+  WebkitMaxLogicalHeight: 'none'
+  MozMaxLogicalHeight: 'none'
+  maxLogicalHeight: 'none'
+  WebkitMaxLogicalWidth: 'none'
+  MozMaxLogicalWidth: 'none'
+  maxLogicalWidth: 'none'
+  WebkitMinLogicalHeight: 0
+  MozMinLogicalHeight: 0
+  minLogicalHeight: 0
+  WebkitMinLogicalWidth: 0
+  MozMinLogicalWidth: 0
+  minLogicalWidth: 0
+  WebkitPerspective: 'none'
+  MozPerspective: 'none'
+  perspective: 'none'
+  WebkitPerspectiveOrigin: '0 0'
+  MozPerspectiveOrigin: '0 0'
+  perspectiveOrigin: '0 0'
+  WebkitPerspectiveOriginX: 'initial'
+  MozPerspectiveOriginX: 'initial'
+  perspectiveOriginX: 'initial'
+  WebkitPerspectiveOriginY: 'initial'
+  MozPerspectiveOriginY: 'initial'
+  perspectiveOriginY: 'initial'
+  WebkitRtlOrdering: 'logical'
+  MozRtlOrdering: 'logical'
+  rtlOrdering: 'logical'
+  WebkitRubyPosition: 'before'
+  MozRubyPosition: 'before'
+  rubyPosition: 'before'
+  WebkitTapHighlightColor: 'transparent'
+  MozTapHighlightColor: 'transparent'
+  tapHighlightColor: 'transparent'
+  WebkitTextCombine: 'none'
+  MozTextCombine: 'none'
+  textCombine: 'none'
+  WebkitTextDecorationsInEffect: 'none'
+  MozTextDecorationsInEffect: 'none'
+  textDecorationsInEffect: 'none'
+  WebkitTextEmphasis: 'initial'
+  MozTextEmphasis: 'initial'
+  textEmphasis: 'initial'
+  WebkitTextEmphasisColor: 'initial'
+  MozTextEmphasisColor: 'initial'
+  textEmphasisColor: 'initial'
+  WebkitTextEmphasisPosition: 'over'
+  MozTextEmphasisPosition: 'over'
+  textEmphasisPosition: 'over'
+  WebkitTextEmphasisStyle: 'none'
+  MozTextEmphasisStyle: 'none'
+  textEmphasisStyle: 'none'
+  WebkitTextFillColor: 'initial'
+  MozTextFillColor: 'initial'
+  textFillColor: 'initial'
+  WebkitTextOrientation: 'verticalRight'
+  MozTextOrientation: 'verticalRight'
+  textOrientation: 'verticalRight'
+  WebkitTextSecurity: 'none'
+  MozTextSecurity: 'none'
+  textSecurity: 'none'
+  WebkitTextStroke: 'initial'
+  MozTextStroke: 'initial'
+  textStroke: 'initial'
+  WebkitTextStrokeColor: 'transparent'
+  MozTextStrokeColor: 'transparent'
+  textStrokeColor: 'transparent'
+  WebkitTextStrokeWidth: 0
+  MozTextStrokeWidth: 0
+  textStrokeWidth: 0
+  WebkitTransform: 'none'
+  MozTransform: 'none'
+  transform: 'none'
+  WebkitTransformOrigin: '0 0'
+  MozTransformOrigin: '0 0'
+  transformOrigin: '0 0'
+  WebkitTransformOriginX: 'initial'
+  MozTransformOriginX: 'initial'
+  transformOriginX: 'initial'
+  WebkitTransformOriginY: 'initial'
+  MozTransformOriginY: 'initial'
+  transformOriginY: 'initial'
+  WebkitTransformOriginZ: 'initial'
+  MozTransformOriginZ: 'initial'
+  transformOriginZ: 'initial'
+  WebkitTransformStyle: 'flat'
+  MozTransformStyle: 'flat'
+  transformStyle: 'flat'
+  WebkitTransition: 'all 0s ease 0s'
+  MozTransition: 'all 0s ease 0s'
+  transition: 'all 0s ease 0s'
+  WebkitTransitionDelay: '0s'
+  MozTransitionDelay: '0s'
+  transitionDelay: '0s'
+  WebkitTransitionDuration: '0s'
+  MozTransitionDuration: '0s'
+  transitionDuration: '0s'
+  WebkitTransitionProperty: 'all'
+  MozTransitionProperty: 'all'
+  transitionProperty: 'all'
+  WebkitTransitionTimingFunction: 'ease'
+  MozTransitionTimingFunction: 'ease'
+  transitionTimingFunction: 'ease'
+  WebkitUserDrag: 'auto'
+  MozUserDrag: 'auto'
+  userDrag: 'auto'
+  WebkitUserModify: 'readOnly'
+  MozUserModify: 'readOnly'
+  userModify: 'readOnly'
+  WebkitUserSelect: 'text'
+  MozUserSelect: 'text'
+  userSelect: 'text'
+  WebkitWritingMode: 'horizontalTb'
+  MozWritingMode: 'horizontalTb'
+  writingMode: 'horizontalTb'
+  whiteSpace: 'normal'
+  widows: 'auto'
+  width: 'auto'
+  wordBreak: 'normal'
+  wordSpacing: 0
+  wordWrap: 'normal'
+  writingMode: 'lrTb'
+  zIndex: 'auto'
+  zoom: 1
+}</code></pre>
+      </div>
+
+      <!-- Writing JavaScript -->
+      <div class="step slide" id="slide-js-1" data-x="-2600" data-y="-500" data-rotate-z="-90">
+        <h1>Writing JavaScript</h1>
+<pre><code class="javascript">console.log('yay')</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-1-2" data-x="-2200" data-y="-500" data-rotate-z="-90">
+        <h1>The basics</h1>
+        <ul>
+          <li>Don't use globals</li>
+          <li>Get off my prototype lawn</li>
+          <li>Uglify</li>
+          <li>Don't make a bunch of requests (batch instead)</li>
+          <li>Profile your code</li>
+        </ul>
+<pre style="position: absolute; top: 0; right: -20px"><code class="html">&lt;script
+  src="my-script.js"
+  data-option-1="foo"
+  data-option-2="bar"
+&gt;&lt;/script&gt;
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-2" data-x="-1600" data-y="-500" data-rotate-z="-90">
+      <h1 class="danger">Innocent code</h1>
+<pre><code class="javascript">['a', 'b', 'c']
+  .map(function(letter, i, list) {
+    return {
+      letter: letter,
+      index: i,
+      nextLetter: list[i + 1],
+    }
+  })
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-3" data-x="-1600" data-y="-500" data-rotate-z="-90">
+      <h1 class="danger">Uncaught Exception</h1>
+<pre><code class="javascript">['a', 'b', 'c']
+  .map(function(letter, i, list) {
+    return {
+      letter: letter,
+      index: i,
+      nextLetter: list[i + 1],
+------------------^ list is undefined
+    }
+  })
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-4" data-x="-600" data-y="-500">
+        <h1>Error Reporting</h1>
+        <img src="/img/sentry-screen-1.png">
+      </div>
+      <div class="step slide" id="slide-js-5" data-x="0" data-y="-500">
+        <h1>Raven.js Stats</h1>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-main">~2400</div>
+            <div class="stat-detail">Lines of Code</div>
+            <div class="stat-source">
+              <a href="https://github.com/getsentry/raven-js/blob/master/dist/raven.js" target="_blank">raven-js</a>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">~24kb</div>
+            <div class="stat-detail">Minified</div>
+            <div class="stat-source">
+              <a href="https://github.com/getsentry/raven-js/blob/master/dist/raven.min.js" target="_blank">minified raven-js</a>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">1 More</div>
+            <div class="stat-detail">XHR Wrapper</div>
+            <div class="stat-source">
+              <a href="https://github.com/getsentry/raven-js/blob/master/dist/raven.js" target="_blank">raven-js</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step slide" id="slide-js-5-2" data-x="0" data-y="-500">
+        <h1>Use the Sentry API</h1>
+<pre><code class="javascript">var prevOnError = window.onerror
+window.onerror = function(message, filename, lineNo, colNo, error) {
+  if (!/amp\-viewer(\.\w+)?\.js/g.test(filename || '') ) {
+    // Not our script, don't worry about reporting
+  }
+  // ...
+  prevOnError.apply(null, arguments)
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-6" data-x="600" data-y="-500">
+        <h1>jQuery.ajax fingerprinting</h1>
+<pre><code class="javascript">if ('jQuery' in window
+  && typeof window.jQuery.ajax === 'function') {
+  transport = options => new Promise((resolve, reject) => {
+    window.jQuery.ajax({
+      type: options.method,
+      success: (...) => resolve(...),
+      error: (...) => reject(...),
+      ...
+    })
+  })
+}
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-6-2" data-x="1100" data-y="-500" data-z="-500" data-rotate-y="90">
+        <h1>Sites using jQuery</h1>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-main">89.5%</div>
+            <div class="stat-detail">BuiltWith top million</div>
+            <div class="stat-source">
+              <a href="https://trends.builtwith.com/javascript/jQuery">BuiltWith</a>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">18.6%</div>
+            <div class="stat-detail">Entire Internet</div>
+            <div class="stat-source">
+              <a href="https://trends.builtwith.com/javascript/jQuery">BuiltWith</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step slide" id="slide-js-7" data-x="1600" data-y="-500" data-rotate-y="180">
+        <h1>Try superagent!</h1>
+<pre><code class="javascript">if (window.superagent) {
+  transport = options => new Promise((resolve, reject) => {
+    const method = window.superagent[options.method]
+    const req = method(options.url)
+    ...
+  })
+}
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-8" data-x="2100" data-y="-500" data-z="-500" data-rotate-y="270">
+        <h1>Or maybe just a CDN</h1>
+<pre><code class="javascript">var script = document.createElement('script')
+// fetch/2.0.3/fetch.min.js
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js'
+script.async = true
+document.head.appendChild(script)</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-9" data-x="2500" data-y="0" data-rotate-y="0">
+<pre><code class="javascript">// Queues up request until dependencies
+// are satisfied
+http
+  .get('/api/foo/bar')
+  .catch(error => console.error(error))
+  .then(res => console.log(res.body))</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-10" data-x="3500" data-y="0" data-rotate-y="0">
+<pre><code class="javascript">import { requires } from 'api-fingerprinter'
+
+@requires('fetch')
+export function get(fetch, url) {
+  return fetch(url)
+}
+
+@requires('fetch')
+export function post(fetch, url, data) {
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-11" data-x="4500" data-y="0" data-rotate-y="0">
+<pre><code class="javascript">import { definer as apiDefiner } from 'api-fingerprinter'
+import {
+  builtInFetchStrategy,
+  jQueryStrategy,
+  superagentStrategy,
+  loadExternalStrategy
+} from 'api-fingerprinter/strategies'</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-11-2" data-x="4500" data-y="0" data-rotate-y="0">
+<pre><code class="javascript">apiDefiner('fetch', [
+  builtInFetchStrategy(),
+  jQueryStrategy(),
+  loadExternalStrategy({
+    url: 'https://cdnjs.com/...',
+    strategy: jqueryStrategy(),
+  }),
+])</code></pre>
+      </div>
+      <div class="step slide" id="slide-js-perf-tips-1" data-x="5500" data-z="-1000" data-y="0" data-rotate-y="90">
+        <h1 class="slab">Performance Tips</h1>
+      </div>
+      <div class="step slide" id="slide-js-perf-tips-2" data-x="5500" data-z="-1000" data-y="100" data-rotate-y="90">
+        <h1 class="slide-list-item">Queue expensive operations</h1>
+      </div>
+      <div class="step slide" id="slide-js-perf-tips-3" data-x="5500" data-z="-1000" data-y="200" data-rotate-y="90">
+        <h1 class="slide-list-item">Measure FPS</h1>
+      </div>
+      <div class="step slide" id="slide-js-perf-tips-4" data-x="5500" data-z="-1000" data-y="300" data-rotate-y="90">
+        <h1 class="slide-list-item">Measure XHRs</h1>
+      </div>
+      <div class="step slide" id="slide-js-perf-examples-1" data-x="5500" data-y="300">
+<pre><code class="javascript">const job = queue.job({
+  // Defer job until fps is > 30
+  runAt: () => fps.greaterThan(30),
+  run: () => something.expensive(),
+})
+
+queue.enqueue(job)</code></pre>
+      </div>
+      <div class="step slide" id="slide-dev-erg-1-1" data-x="5500" data-y="1300" data-rotate-z="90">
+        <h1 class="slab">Developer Ergonomics</h1>
+      </div>
+      <div class="step slide" id="slide-dev-erg-1-2" data-x="5100" data-y="1400" data-rotate-z="90">
+        <img src="/img/amp-viewer-typescript.png">
+      </div>
+      <div class="step slide" id="slide-dev-erg-1-3" data-x="5100" data-y="1500" data-rotate-z="90">
+        <video autoplay loop muted id="carousel-video-1" style="margin-left: 400px">
+          <source src="/img/bmw-demo-5.mp4" />
+        </video>
+      </div>
+      <div class="step slide" id="slide-dev-erg-1-4" data-x="5100" data-y="2250" data-rotate-z="90">
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-main">20k+</div>
+            <div class="stat-detail">Websites</div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">&lt;15kb</div>
+            <div class="stat-detail">*some builds</div>
+          </div>
+          <div class="stat">
+            <div class="stat-main">3.5kb</div>
+            <div class="stat-detail">Preact</div>
+          </div>
+        </div>
+      </div>
+      <div class="step slide" id="slide-dev-erg-1-5" data-x="5100" data-y="2800" data-rotate-z="90">
+<pre><code class="jsx">render(props: UrlIndicatorProps) {
+  return (
+    &lt;ul class="url-indicator"&gt;
+      {series(props.length).map(i => {
+        return (
+          &lt;li class={{ 'active': props.activeIdx === i }}&gt;&lt;/li&gt;
+        )
+      })}
+    &lt;/ul&gt;
+  )
+}</code></pre>
+      </div>
+      <div class="step slide" id="slide-dev-erg-2" data-x="5100" data-y="2800" data-rotate-z="90">
+      <h1>Module bundlers can output multiple formats</h1>
+<pre><code class="javascript">window.myWidget
+import { MyWidget } from 'my-widget'
+const MyWidget = require('my-widget')
+</code></pre>
+      </div>
+      <div class="step slide" id="slide-conclusion" data-x="-3500" data-y="-1550" data-rotate-z="90">
+        <h1 class="slab">Conclusion</h1>
+        <ul>
+          <li>Take responsibility for your embedded code</li>
+          <li>Be aware of resource usage</li>
+          <li>Prefix styles or use custom elements or iframes</li>
+          <li>Fingerprint APIs</li>
+          <li>Queue expensive operations</li>
+          <li>Defer them until it's okay</li>
+        </ul>
+      </div>
+    <script src="/dist/slides.js"></script>
+  </body>
+</html>
